@@ -62,7 +62,7 @@ public class Principal {
                                         switch (m) {
                                             case 1:
                                                 //Capturar curso por matricula
-                                                obj.capturarCurso(JOptionPane.showInputDialog(null, "Introduce la matricula del curso: "));
+                                                obj.capturarCurso();
                                                 b = false;
                                                 break;
                                             case 2:

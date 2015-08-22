@@ -18,7 +18,7 @@ public class Metodos {
             String sexo) {
 
         //String miEdad = String.valueOf(edad);
-        String matricula = nombre.substring(0, 1) + app.substring(0, 1) + apm.substring(0, 1) + edad  + sexo;
+        String matricula = nombre.substring(0, 1) + app.substring(0, 1) + apm.substring(0, 1) + edad + sexo;
 
         return matricula.toUpperCase();
 
@@ -28,7 +28,7 @@ public class Metodos {
     public String GenerarMatricuMateria(String nombre, String des,
             int duracion) {
 
-        String matricula = nombre.substring(0, 1) + des.substring(0, 1) + duracion+1+4+3 ;
+        String matricula = nombre.substring(0, 1) + des.substring(0, 1) + duracion + 1 + 4 + 3;
 
         return matricula.toUpperCase();
     }
@@ -432,24 +432,34 @@ public class Metodos {
     }
 
     //Esto es para capturar a que curso va a pertenecer el alumno y se puedan ver los cursos disponibles
-    public void capturarCurso(String materia) {
+    public void capturarCurso() {
         //para asignar un nombre del curso al que esta perteneciendo el alumno
 
         for (int i = 0; i <= materias.size() - 1; i++) {
 
             Materia mate = (Materia) materias.get(i);
             Alumno obj = (Alumno) alumnos.get(i);
-
-            if (materia.equals(mate.getMatri())) {
-                //Agregando el nombre de la matricula al curso
-                obj.setMateria(mate.getNombre());
-                JOptionPane.showMessageDialog(null, "Has agregado esta materia a tus cursos");
-
-            }
-//                else {
-//                JOptionPane.showMessageDialog(null, "Has escrito mal la matricula, intentelo de nuevo");
-//            }
-
+           
+            boolean bandera = true;
+            do{
+            
+            String materia = JOptionPane.showInputDialog(null, "Introduce la matricula del curso: ");
+            
+            
+                 if (materia.equals(mate.getMatri())) {
+                    //Agregando el nombre de la matricula al curso
+                    obj.setMateria(mate.getNombre());
+                    JOptionPane.showMessageDialog(null, "Has agregado esta materia a tus cursos");
+                    bandera=false;
+                    
+                    } else {
+                    
+                    JOptionPane.showMessageDialog(null, "Has escrito mal la matricula, intentelo de nuevo");
+                    bandera=true;
+                 }
+        }while(bandera==true);
+                
+           
         }
 
     }
@@ -467,6 +477,7 @@ public class Metodos {
 
     }
 //Ver adeudos disponibles
+
     public void verAdeudos() {
 
         if (alumnos.isEmpty()) {
@@ -502,7 +513,7 @@ public class Metodos {
                 Materia mate = (Materia) materias.get(i);
 
                 if (mate.getCosto() > 0) {
-                String matricula = JOptionPane.showInputDialog(null, "Introduce la matricula del alumno ");
+                    String matricula = JOptionPane.showInputDialog(null, "Introduce la matricula del alumno ");
 
                     if (matricula.equals(alum.getMatricula())) {
                         String m;
@@ -514,6 +525,8 @@ public class Metodos {
 
                         r = a - p;
                         mate.setCosto(r);
+
+                        JOptionPane.showInputDialog(null, "Tu pago se ha hecho con éxito");
 
                     } else {
 
