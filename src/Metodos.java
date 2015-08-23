@@ -7,6 +7,7 @@ public class Metodos {
     //creando array list para guardar los datos creados
     public static ArrayList<Alumno> alumnos = new ArrayList<>();
     public static ArrayList<Materia> materias = new ArrayList<>();
+    public static ArrayList<Materia> calificaciones = new ArrayList<>();
     public static ArrayList<Profesor> profesor = new ArrayList<>();
 
     Principal ocul = new Principal();
@@ -316,11 +317,12 @@ public class Metodos {
         for (int i = 0; i <= alumnos.size() - 1; i++) {
 
             Alumno alum = (Alumno) alumnos.get(i);
+            Materia mate = (Materia) calificaciones.get(i);
 
             if (matricula.equals(alum.getMatricula())) {
                 JOptionPane.showMessageDialog(null, "Los datos del alumno encontrado son: \n" + "Matricula: " + alum.getMatricula() + "\nNombre: "
                         + alum.getNombre() + " " + alum.getApPat() + " " + alum.getApMat() + "\nEdad: " + alum.getEdad()
-                        + "\nMateria que cursa: " + alum.getMateria());
+                        + "\nMateria que cursa: " + alum.getMateria() + "\nCalificacion del curso: " + mate.getCaliTotal());
             } else {
 
                 JOptionPane.showMessageDialog(null, "Has escrito mal la matricula, intentelo de nuevo");
@@ -439,27 +441,25 @@ public class Metodos {
 
             Materia mate = (Materia) materias.get(i);
             Alumno obj = (Alumno) alumnos.get(i);
-           
+
             boolean bandera = true;
-            do{
-            
-            String materia = JOptionPane.showInputDialog(null, "Introduce la matricula del curso: ");
-            
-            
-                 if (materia.equals(mate.getMatri())) {
+            do {
+
+                String materia = JOptionPane.showInputDialog(null, "Introduce la matricula del curso: ");
+
+                if (materia.equals(mate.getMatri())) {
                     //Agregando el nombre de la matricula al curso
                     obj.setMateria(mate.getNombre());
                     JOptionPane.showMessageDialog(null, "Has agregado esta materia a tus cursos");
-                    bandera=false;
-                    
-                    } else {
-                    
+                    bandera = false;
+
+                } else {
+
                     JOptionPane.showMessageDialog(null, "Has escrito mal la matricula, intentelo de nuevo");
-                    bandera=true;
-                 }
-        }while(bandera==true);
-                
-           
+                    bandera = true;
+                }
+            } while (bandera == true);
+
         }
 
     }
@@ -499,6 +499,7 @@ public class Metodos {
             }
         }
     }
+//MEtodo para pagar rl curso
 
     public void pagarCurso() {
 
@@ -526,7 +527,7 @@ public class Metodos {
                         r = a - p;
                         mate.setCosto(r);
 
-                        JOptionPane.showInputDialog(null, "Tu pago se ha hecho con éxito");
+                        JOptionPane.showMessageDialog(null, "Tu pago se ha hecho con éxito");
 
                     } else {
 
@@ -541,6 +542,62 @@ public class Metodos {
 
         }
 
+    }
+//Metodo para generar la calificacion a partir de la primer calificacion
+
+    public void generarCalificacion(Double cali1, Double cali2, Double cali3) {
+        Materia obj1 = new Materia();
+        Double resul;
+
+        resul = (cali1 + cali2 + cali3) / 3;
+
+        JOptionPane.showMessageDialog(null, "La calificacion final es: " + resul);
+        obj1.setCaliTotal(resul);
+
+        calificaciones.add((Materia) obj1);
+
+    }
+//Subir calificaciones del alumno
+
+    public void subirCalificacionAlumno() {
+        if (alumnos.isEmpty()) {
+            
+                        JOptionPane.showMessageDialog(null, "No hay ningun alumno registrado");
+
+
+        } else {
+
+            for (int i = 0; i <= alumnos.size() - 1; i++) {
+
+                Alumno alum = (Alumno) alumnos.get(i);
+
+                String matricula = JOptionPane.showInputDialog(null, "Introduce la matricula del alumno ");
+
+                if (matricula.equals(alum.getMatricula())) {
+
+                    JOptionPane.showMessageDialog(null, "El alumno es: \n"+"Nombre: "
+                            + alum.getNombre() + " " + alum.getApPat() + " " + alum.getApMat());
+
+                    Double c1, c2, c3;
+                    String ca1, ca2, ca3;
+                    ca1 = JOptionPane.showInputDialog(null, "Introduce la primer calificación: ");
+                    ca2 = JOptionPane.showInputDialog(null, "Introduce la segunda calificación: ");
+                    ca3 = JOptionPane.showInputDialog(null, "Introduce la tercer calificación: ");
+
+                    //convirtiendo a double
+                    c1 = Double.parseDouble(ca1);
+                    c2 = Double.parseDouble(ca2);
+                    c3 = Double.parseDouble(ca3);
+
+                    generarCalificacion(c1, c2, c3);
+                } else {
+
+                    JOptionPane.showMessageDialog(null, "Has escrito mal la matricula, intentelo de nuevo");
+                }
+
+            }
+
+        }
     }
 
 }

@@ -27,7 +27,7 @@ public class Principal {
                     do { //inicio del segundo do while
 
                         opc2 = JOptionPane.showInputDialog(null, "***Sistema Escolar*** \n[1]Alta de alumno \n"
-                                + "[2]Alta cursos\n[3]Alta profesor\n[4]Regresar \n ¿Que desea hacer?");
+                                + "[2]Alta cursos\n[3]Alta profesor\n[4]Subir calificaciones\n[5]Regresar\n¿Que desea hacer?");
 
                         int i = Integer.parseInt(opc2);
 
@@ -149,8 +149,16 @@ public class Principal {
 
                                 break;
                             case 4:
+                              //Subir calificaciones
+                               obj.subirCalificacionAlumno();
+                                
+                                bandera=true;
+                                
+                                break;
+                            case 5:
+                                //Regresar
                                 bandera = false;
-                                //salir
+                                
                                 break;
                             default:
                                 JOptionPane.showMessageDialog(null, "Opcion no valida,Escriba una opcion válida");
@@ -186,11 +194,11 @@ public class Principal {
                         } else if (c == 3) {
                             bandera3 = false;
                         } else {
-                            
+
                             JOptionPane.showMessageDialog(null, "Opcion no valida");
                         }
-                    } while (bandera3 ==true);
-                    bandera2=true;
+                    } while (bandera3 == true);
+                    bandera2 = true;
 
                     break;
                 case 3:

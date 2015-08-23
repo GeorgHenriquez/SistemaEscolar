@@ -7,14 +7,16 @@ public class Materia {
     public String Descripcion;
     public int Duracion;
     public int Costo;
+    public Double caliTotal;
 
     //creando un constructor
-    public Materia(String matricula, String nombre, String descrip, int durac,int costo) {
+    public Materia(String matricula, String nombre, String descrip, int durac,int costo,Double calitotal) {
         this.Matricula = matricula;
         this.Nombre = nombre;
         this.Descripcion = descrip;
         this.Duracion = durac;
         this.Costo = costo;
+        this.caliTotal = calitotal;
     }
 
     Materia() {
@@ -60,5 +62,12 @@ public class Materia {
     }
     public void setCosto(int costo){
         this.Costo = costo;
+    }
+    //Calificacion total
+    public double getCaliTotal(){
+        return caliTotal;
+    }
+    public void setCaliTotal(Double calitotal){
+        this.caliTotal = calitotal;
     }
 }
